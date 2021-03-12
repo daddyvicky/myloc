@@ -9,13 +9,13 @@ if (isset($_POST["email"])) {
   list($userName, $mailDomain) = explode("@", $toEmail);
   //checking the MX record of the domain.
   if (checkdnsrr($mailDomain, 'MX')) {
-    $mj = new \Mailjet\Client('202bdb742de9d4d3767c7f72245670bd', 'b1d22c12951a719483695b13dd8abd4c', true, ['version' => 'v3.1']);
+    $mj = new \Mailjet\Client('USER_KEY', 'API_KEY', true, ['version' => 'v3.1']);
     $body = [
       'Messages' => [
         [
           'From' => [
-            'Email' => "vikash9jat@gmail.com",
-            'Name' => "vikash"
+            'Email' => "YOUR_EMAIL@EAMIL.COM",
+            'Name' => "YOUR NAME"
           ],
           'To' => [
             [

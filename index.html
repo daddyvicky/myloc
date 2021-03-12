@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Map Loc</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+  <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  <script src="./js/app.js"></script>
+</head>
+
+<body>
+  <div id="map"></div>
+  <div class="m-p">
+    <div class="m">
+      <div>
+        <label>Email : </label>
+        <input type="hidden" name="lat" id="lat">
+        <input type="hidden" name="lng" id="lng">
+        <input type="email" name="userEmail" id="userEmail" class="email">
+        <button name="submit" class="btn" onClick="sendEmail();">Send</button>
+      </div>
+      <span id="checker_info" class="checker_info"></span>
+      <center><div id="status"></div></center>
+      <span class="x" draggable="true">&times;</span>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgtW2Yi8EQa06PG_-uDfEaXBMl9gN87OA&callback=initMap&libraries=&v=weekly"
+    async></script>
+  <script>
+    //Client side validation of email.
+    $("#userEmail").on("keyup",function(){
+      checkEmail();
+    })
+    //function to check email format.
+    function checkEmail() {
+      var valid = true;
+      if (!$("#userEmail").val()) {
+        $("#checker_info").html("(required)");
+        $("#userEmail").css('background-color', '#ff0000');
+        valid = false;
+      }
+      else if (!$("#userEmail").val().match(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/)) {
+        $("#checker_info").html("(Invalid Email)");
+        $("#userEmail").css('background-color', '#ff9999');
+        valid = false;
+      }else{
+        $("#checker_info").html("");
+        $("#userEmail").css('background-color', '#91e398');
+      }
+      return valid;
+    }
+    //Clear all the fields and text after mail send.
+    function clrAll(){
+        $('#userEmail').val('');
+        $('#status').html('');
+        $("#checker_info").html("");
+        $("#userEmail").css('background-color', '#ffffff');
+    }
+    //Function to send mail.
+    function sendEmail() {
+      var valid;
+      valid = checkEmail();
+      if (valid) {
+        jQuery.ajax({
+          url: "mailer/mail.php",
+          data: 'email=' + $("#userEmail").val() + '&lat=' + $("#lat").val() + '&lng=' + $("#lng").val(),
+          type: "POST",
+          success: function (data) {
+            $("#status").html(data);
+            $("#userEmail").css('background-color', '#91e398');
+            setTimeout(clrAll,5000);
+          },
+          error: function () {}
+        });
+      }
+    }
+  </script>
+</body>
+
+</html>

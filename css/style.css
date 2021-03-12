@@ -1,0 +1,82 @@
+#map {
+    height: 100%;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.center {
+    display: inline-block;
+    text-align: center;
+    font-size: 30px;
+}
+
+/* POP UP WINDOW */
+
+.m-p {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    display: none;
+}
+
+.m {
+    background: white;
+    width: 60%;
+    padding: 30px;
+    border-radius: 6px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    animation: 1s drop;
+}
+
+@keyframes drop {
+    0% {
+        top: -100px;
+    }
+
+    100% {
+        top: 20%;
+    }
+}
+.x {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    font-size: 40px;
+    cursor: pointer;
+}
+/* form styling */
+.info {
+    font-size: .8em;
+    color: #FF6600;
+    letter-spacing: 2px;
+    padding-left: 5px;
+}
+
+.email {
+    padding: 10px;
+    border: #1a1a1a 1px solid;
+    border-radius: 4px;
+    width: 70%;
+}
+
+.btn {
+    background-color: #2fc332;
+    border: 0;
+    padding: 10px 40px;
+    color: #fff;
+    border: #f0f0f0 1px solid;
+    border-radius: 4px;
+}
